@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Disney Movie Plot Generator</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #f0f8ff, #e6e6fa);
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            text-align: center;
+            padding: 50px;
+            color: #333;
+        }
+        h1 {
+            font-size: 3em;
+            color: #ff69b4;
+        }
+        #plot {
+            margin-top: 40px;
+            font-size: 1.5em;
+            min-height: 150px;
+        }
+        button {
+            margin-top: 30px;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 15px;
+            background-color: #ff6f61;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #ff3b2e;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>✨ Disney Movie Plot Generator ✨</h1>
+
+    <div id="plot">Click the button to get a magical story!</div>
+
+    <button onclick="generatePlot()">Generate Plot</button>
+
+    <script>
+        const heroes = ["a brave princess", "an adventurous boy", "a clever inventor", "a lost mermaid", "a daring lion cub", "a magical frog", "a mischievous raccoon"];
+        const companions = ["a talking dragon", "a flying carpet", "a loyal snowman", "a wise old turtle", "a goofy sidekick", "a tiny fairy"];
+        const quests = ["to save their kingdom", "to break an ancient curse", "to find a legendary treasure", "to defeat an evil sorcerer", "to discover the secret of the stars", "to bring peace to the land"];
+        const settings = ["in a hidden island", "across a dazzling desert", "under the sea", "among the clouds", "deep inside an enchanted forest", "in a kingdom made of candy"];
+
+        function generatePlot() {
+            const hero = heroes[Math.floor(Math.random() * heroes.length)];
+            const companion = companions[Math.floor(Math.random() * companions.length)];
+            const quest = quests[Math.floor(Math.random() * quests.length)];
+            const setting = settings[Math.floor(Math.random() * settings.length)];
+
+            document.getElementById('plot').innerHTML = `Once upon a time, ${hero} teamed up with ${companion} ${quest} ${setting}. 🌟`;
+        }
+    </script>
+
+</body>
+</html>
