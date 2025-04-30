@@ -1,0 +1,53 @@
+import streamlit as st
+import random
+
+# Training data (you can expa this with more Disney plots)
+training_text = """
+Simba, a young lion prince, flees his kingdom after the death of his father. 
+He returns years later to reclaim his throne. 
+Elsa, a queen with magical ice powers, accidentally plunges her kingdom into eternal winter. 
+Her sister Anna embarks on a journey to save her. 
+Moana, the daughter of a Polynesian chief, sets sail to save her island with the help of the demigod Maui.
+Aladdin, a street-smart boy, finds a magical lamp and befriends a genie who helps him win the heart of Princess Jasmine.
+"""
+
+# Markov Chain functions
+def build_markov_chain(text):
+    words = text.split()
+    markov_chain = {}
+    
+    for i in range(len(words) - 1):
+        current_word = words[i]
+        next_word = words[i + 1]
+        
+        if current_word not in markov_chain:
+            markov_chain[current_word] = []
+        markov_chain[current_word].append(next_word)
+    
+    return markov_chain
+
+def generate_sentence(chain, length=20):
+    current_word = random.choice(list(chain.keys()))
+    sentence = [current_word]
+
+    for _ in range(length - 1):
+        if current_word in chain:
+            next_word = random.choice(chain[current_word])
+            sentence.append(next_word)
+            current_word = next_word
+        else:
+            break
+    
+    return ' '.join(sentence) + '.'
+
+# Build the Markov chain
+chain = build_markov_chain(training_text)
+
+# Streamlit UI
+st.set_page_config(page_title="Magic Plot AI", page_icon="🎬")
+st.title("🎬 Magic Plot AI – Disney Movie Generator")
+st.markdown("Generate an original Disney-style plot using AI!")
+
+if st.button("Generate Movie Plot"):
+    story = generate_sentence(chain)
+    st.success(story)
